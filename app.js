@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-app.use(session({       //Sessionens inställningar
+app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
     resave: false

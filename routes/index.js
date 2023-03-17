@@ -35,7 +35,7 @@ router.post('/login', async function (req, res, next) {
         bcrypt.compare(password, user[0].password, function (err, result) {
             if (result === true) {
                 req.session.user = user[0]
-                return res.redirect('/profile')
+                return res.redirect('/')
             }
             else {
                 return res.send('Invalid username or password')
@@ -99,7 +99,6 @@ router.post('/register', async function (req, res, next) {
             else {
                 return res.send('Username is already taken')
             }
-            //const [rows] = await promisePool.query("INSERT INTO efusers (name, password) VALUES (?, ?)", [username, hash])
         });
     }
     else {
@@ -133,5 +132,22 @@ router.get('/post/:id', async function (req, res) {
         title: 'Forum',
     });
 })
+
+router.get('/like/:id', async function (req, res) {
+    if(req.session.user)
+    {
+        const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [req.params.id])
+        res.redirect('/')
+    }
+    else {
+        res.redirect('/')
+    }
+})
+
+// async function like(id)
+// {
+//     console.log(id)
+//     const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [id])
+// }
 
 module.exports = router;
