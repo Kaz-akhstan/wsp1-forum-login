@@ -1,0 +1,27 @@
+{% extends "base.njk" %}
+{% block  content %}
+<div class="container">
+  <ul>
+    {% for post in posts %}
+      <li>
+        <div class="msg">
+          <div class="msg-title">
+            <p><a href="/post/{{ post.id }}">{{ post.title }}</a></p>
+            <p>@{{ post.name }}</p>
+          </div>
+          <div class="msg-content">
+            <p>{{ post.content }}</p>
+          </div>
+          <p class="msg-date">{{ post.createdAt }}</p>
+          <div class="msg-links">
+            <a href="">Like</a>
+            <a href="">Comment</a>
+            <a href="">Share</a>
+            <a href="">Report</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

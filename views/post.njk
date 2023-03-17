@@ -1,0 +1,19 @@
+{% extends "base.njk" %}
+{% block  content %}
+<div class="msg container">
+    <div class="msg-title">
+        <p>{{ post.title }}</p>
+        <p>@{{ post.username }}</p>
+    </div>
+    <div class="msg-content-all">
+        <p>{{ post.content }}</p>
+    </div>
+    <p class="msg-date">{{ post.createdAt }}</p>
+    <div class="msg-links">
+        <a href="">Like</a>
+        <a href="">Comment</a>
+        <a href="">Share</a>
+        <a href="">Report</a>
+      </div>
+</div>
+{% endblock %}
