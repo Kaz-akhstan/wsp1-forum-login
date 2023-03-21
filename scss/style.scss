@@ -1,0 +1,75 @@
+@use "reset";
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: hsl(0, 0%, 85%);
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+.msg {
+    padding: 1rem;
+    margin: .25rem 0;
+    border-radius: .5rem;
+    background-color: hsl(0, 0%, 90%);
+    display: flex;
+    flex-direction: column;
+}
+
+.msg:hover {
+    background-color: hsl(0, 0%, 95%);
+    cursor: pointer;
+}
+
+.msg-title {
+    font-style: italic;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    > p:first-child {
+        margin-right: auto;
+        font-weight: bolder;
+        font-style: normal;
+    }
+}
+
+.msg-links {
+    justify-content: end;
+    display: flex;
+    gap: 1rem;
+}
+
+.msg-content {
+    font-weight: normal;
+    max-height: 10rem;
+    overflow: hidden;
+}
+
+.msg-content-all {
+    max-height: fit-content;
+    overflow: auto;
+}
+
+.msg-date {
+    font-style: italic;
+}
+
+.msg-hidden {
+    display: none;
+}
+
+.container {
+    width: min(100ch, 100vw - 2rem);
+    margin-inline: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}

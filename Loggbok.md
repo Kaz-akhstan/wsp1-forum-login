@@ -2,3 +2,8 @@
 
 ## 17-03-2023
 Jag har implementerat både login och forumet samt fått dom att fungera tillsammans, jag har även försökt lägga till ett like system men det är inte helt färdigt. 
+
+## 21-03-2023
+Förra gången implementerade jag både login och forumet tillsammans. Jag försökte även lägga till ett like system.
+Idag ska jag fortsätta jobba på like systemet.
+Jag har haft problem med att fixa like systemet men jag fixade naven.

@@ -1,0 +1,87 @@
+@use "reset";
+
+$nav-padding: 1rem;
+$main-colour: #252525;
+
+.navbar {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: sticky;
+    top: 0;
+    background-color: $main-colour;
+    margin-bottom: 1rem;
+    @media (max-width: 599px) {
+        padding: $nav-padding 0;
+    }
+    .container > a {
+        font-weight: bolder;
+        font-size: larger;
+        color: white;
+        margin-right: auto;
+        text-decoration: none;
+    }
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+    }
+    &__button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        @media (min-width: 600px) {
+            display: none;
+        }
+    }
+    &__collapse {
+        @media (max-width: 599px) {
+            display: none;
+            > ul {
+                width: 100%;
+                li > a {
+                    width: 100%;
+                }
+            }
+        }
+        > ul {
+            margin: 0;
+            margin-left: auto;
+            display: flex;
+            padding: 0;
+            flex-direction: row;
+            list-style: none;
+            li > a {
+                padding: 1.5rem $nav-padding;
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            li > a:hover {
+                cursor: pointer;
+                background-color: hsl(0, 0%, 85%);
+                color: $main-colour;
+            }
+        }
+        &--show {
+            display: block;
+            width: 100%;
+            > ul {
+                flex-direction: column;
+                padding: 0;
+            }
+        }
+    }
+}
+
+.navbar__collapse {
+
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}

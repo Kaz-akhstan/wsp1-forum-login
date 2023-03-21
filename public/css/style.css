@@ -1,0 +1,148 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: hsl(0deg, 0%, 85%);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.msg {
+  padding: 1rem;
+  margin: 0.25rem 0;
+  border-radius: 0.5rem;
+  background-color: hsl(0deg, 0%, 90%);
+  display: flex;
+  flex-direction: column;
+}
+
+.msg:hover {
+  background-color: hsl(0deg, 0%, 95%);
+  cursor: pointer;
+}
+
+.msg-title {
+  font-style: italic;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.msg-title > p:first-child {
+  margin-right: auto;
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.msg-links {
+  justify-content: end;
+  display: flex;
+  gap: 1rem;
+}
+
+.msg-content {
+  font-weight: normal;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+.msg-content-all {
+  max-height: fit-content;
+  overflow: auto;
+}
+
+.msg-date {
+  font-style: italic;
+}
+
+.msg-hidden {
+  display: none;
+}
+
+.container {
+  width: min(100ch, 100vw - 2rem);
+  margin-inline: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=style.css.map */

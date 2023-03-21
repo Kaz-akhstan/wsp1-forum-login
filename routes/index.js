@@ -10,12 +10,14 @@ router.get('/', async function (req, res, next) {
     res.render('index.njk', {
         posts: posts,
         title: 'Forum',
+        user: req.session.user || 0
     })
 })
 
 router.get('/login', async function (req, res, next) {
     res.render('login.njk'), {
-        title: 'Login'
+        title: 'Login',
+        user: req.session.user || 0
     }
 });
 
@@ -32,22 +34,30 @@ router.post('/login', async function (req, res, next) {
     }
     else {
         const [user] = await promisePool.query(`SELECT * FROM rj28users WHERE name = ?`, [username])
-        bcrypt.compare(password, user[0].password, function (err, result) {
-            if (result === true) {
-                req.session.user = user[0]
-                return res.redirect('/')
-            }
-            else {
-                return res.send('Invalid username or password')
-            }
-        })
+        console.log(user[0])
+        if(user[0] !== undefined)
+        {
+            bcrypt.compare(password, user[0].password, function (err, result) {
+                if (result === true) {
+                    req.session.user = user[0]
+                    return res.redirect('/')
+                }
+                else {
+                    return res.send('Invalid username or password')
+                }
+            })
+        }
+        else {
+            return res.send('Invalid username or password')
+        }
     }
 })
 
 router.get('/profile', async function (req, res, next) {
     if (req.session.user) {
         res.render('profile.njk', {
-            name: req.session.user.name
+            name: req.session.user.name,
+            user: req.session.user || 0
         })
     }
     else {
@@ -66,7 +76,8 @@ router.post('/logout', async function (req, res, next) {
 })
 
 router.get('/register', async function (req, res, next) {
-    res.render('register.njk')
+    res.render('register.njk', {
+        user: req.session.user || 0})
 })
 
 router.post('/register', async function (req, res, next) {
@@ -110,7 +121,8 @@ router.get('/new', async function (req, res, next) {
     const [users] = await promisePool.query("SELECT * FROM rj28users")
     if(req.session.user) {
         res.render('new.njk', {
-            title: 'Nytt inlägg'
+            title: 'Nytt inlägg',
+            user: req.session.user || 0
         })
     }
     else {
@@ -130,6 +142,7 @@ router.get('/post/:id', async function (req, res) {
     res.render('post.njk', {
         post: rows[0],
         title: 'Forum',
+        user: req.session.user || 0
     });
 })
 
