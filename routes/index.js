@@ -136,6 +136,7 @@ router.post('/new', async function (req, res, next){
     const { title, content } = req.body
     let errors = []
     if(!title || !content) errors.push("Title and content required")
+    if(title && title.length > 80) errors.push("Title must be less than 80 characters")
     if(errors.length === 0)
     {
         const sanitize = (str) => {

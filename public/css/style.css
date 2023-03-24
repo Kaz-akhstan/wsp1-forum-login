@@ -94,7 +94,7 @@ ul {
 }
 
 .msg:hover {
-  background-color: hsl(0deg, 0%, 95%);
+  background-image: linear-gradient(to top, #e8eaed 0%, white 100%);
   cursor: pointer;
 }
 

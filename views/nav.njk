@@ -4,7 +4,9 @@
         <button class="navbar__button"><span class="material-symbols-outlined">menu</span></button>
         <div class="navbar__collapse">
             <ul>
+                {% if user %}
                 <li><a href="/new">Posta</a></li>
+                {% endif %}
                 <li><a href="">Kategorier</a></li>
                 {% if user %}
                     <li><a href="/profile">Profil</a></li>
