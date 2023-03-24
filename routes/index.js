@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 
 const db = require('../utils/database');
 const promisePool = db.promise();
+const validator = require('validator');
+const { response } = require('express');
 
 router.get('/', async function (req, res, next) {
     const [posts] = await promisePool.query('SELECT rj28forum.*, rj28users.name FROM rj28forum JOIN rj28users ON rj28forum.AuthorId = rj28users.id ORDER BY createdAt DESC')
@@ -132,8 +134,24 @@ router.get('/new', async function (req, res, next) {
 
 router.post('/new', async function (req, res, next){
     const { title, content } = req.body
-    const [rows] = await promisePool.query("INSERT INTO rj28forum (AuthorId, title, content) VALUES (?, ?, ?)", [req.session.user.id, title, content])
-    res.redirect('/')
+    let errors = []
+    if(!title || !content) errors.push("Title and content required")
+    if(errors.length === 0)
+    {
+        const sanitize = (str) => {
+            let temp = str.trim()
+            temp = validator.stripLow(temp)
+            temp = validator.escape(temp)
+            return temp
+        }
+        if(title) sanitizedTitle = sanitize(title)
+        if(content) sanitizedContent = sanitize(content) 
+        const [rows] = await promisePool.query("INSERT INTO rj28forum (AuthorId, title, content) VALUES (?, ?, ?)", [req.session.user.id, sanitizedTitle, sanitizedContent])
+        res.redirect('/')
+    }
+    else {
+        res.send(errors)
+    }
 })
 
 router.get('/post/:id', async function (req, res) {
@@ -144,17 +162,6 @@ router.get('/post/:id', async function (req, res) {
         title: 'Forum',
         user: req.session.user || 0
     });
-})
-
-router.get('/like/:id', async function (req, res) {
-    if(req.session.user)
-    {
-        const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [req.params.id])
-        res.redirect('/')
-    }
-    else {
-        res.redirect('/')
-    }
 })
 
 // async function like(id)

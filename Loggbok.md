@@ -7,3 +7,7 @@ Jag har implementerat både login och forumet samt fått dom att fungera tillsam
 Förra gången implementerade jag både login och forumet tillsammans. Jag försökte även lägga till ett like system.
 Idag ska jag fortsätta jobba på like systemet.
 Jag har haft problem med att fixa like systemet men jag fixade naven.
+
+## 24-03-2023
+Förra gången fixade jag naven så att den visade olika knappar beroende på om man var inloggad eller inte.
+Idag ska jag jobba på att tvätta data och validera.
