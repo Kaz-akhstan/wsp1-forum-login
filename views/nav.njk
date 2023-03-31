@@ -1,18 +1,21 @@
 <nav class="navbar">
     <div class="navbar__inner container">
-        <a href="/">Forum 2</a>
+        <a href="/">
+            <div class="logo">
+                <img src="profiles/0.png" alt="">
+            </div>
+            </a>
         <button class="navbar__button"><span class="material-symbols-outlined">menu</span></button>
         <div class="navbar__collapse">
             <ul>
                 {% if user %}
-                <li><a href="/new">Posta</a></li>
+                <li><a href="/new">Post</a></li>
                 {% endif %}
-                <li><a href="">Kategorier</a></li>
+                <li><a href="">Tags</a></li>
                 {% if user %}
-                    <li><a href="/profile">Profil</a></li>
+                    <li><a href="/profile">Profile</a></li>
                 {% else %}
-                    <li><a href="/login">Logga in</a></li>
-                    <li><a href="/register">Registrera</a></li>
+                    <li><a href="/login">Login</a></li>
                 {% endif %}
             </ul>
         </div>

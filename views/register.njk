@@ -1,11 +1,17 @@
 {% extends "base.njk" %}
 {% block content %}
 <main class="container">
-    <form action="/register" method="POST">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="passwordConfirmation" placeholder="Confirm Password">
-        <button type="submit">Register</button>
+    <form action="/register" class="login-register-form" method="POST">
+        <div class="center">
+            <h1>REGISTER</h1>
+            <p>Please enter a valid username and password</p>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="passwordConfirmation" placeholder="Confirm Password">
+            <p id="errors"></p>
+            <p>Already have an account? <a href="/login">Click here to login</a></p>
+            <button type="submit">Register</button>
+        </div>
     </form>
     {% for error in errors %}
     <p>{{ error }}</p>

@@ -1,10 +1,16 @@
 {% extends "base.njk" %}
 {% block content %}
-<main class="container">
-    <form action="/login" method="POST">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
+<main class="container vertical-center">
+    <form action="/login" class="login-register-form" method="POST">
+        <div class="center">
+            <h1>LOGIN</h1>
+            <p>Please enter your username and password</p>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <p id="errors"></p>
+            <p>Don't have an account? <a href="/register">Click here to register</a></p>
+            <button type="submit">Login</button>
+        </div>
     </form>
 </main>
 {% endblock %}

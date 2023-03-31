@@ -1,8 +1,15 @@
 @use "reset";
 
+$MainColour: #313FB3;
+$SecondaryColour: #B31873;
+$LighterDarkColour: hsl(0, 0%, 35%);
+$DarkColour: #252525;
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: hsl(0, 0%, 85%);
+    /* Created with https://www.css-gradient.com */
+    background: #313FB3;
+    background: linear-gradient(to bottom right, #313FB3, #B31873);
 }
 
 ul {
@@ -17,16 +24,11 @@ ul {
     padding: 1rem;
     margin: .25rem 0;
     border-radius: .5rem;
-    background-color: hsl(0, 0%, 90%);
+    border: $LighterDarkColour solid 1px;
+    background-color: $DarkColour;
+    color: hsl(0, 0%, 95%);
     display: flex;
     flex-direction: column;
-}
-
-.msg:hover {
-    // background-color: hsl(0, 0%, 95%);
-    background-image: linear-gradient(to top, #e8eaed 0%, white 100%);
-    cursor: pointer;
-
 }
 
 .msg-title {
@@ -39,6 +41,14 @@ ul {
         margin-right: auto;
         font-weight: bolder;
         font-style: normal;
+        > a {
+            color: $MainColour;
+        }
+    }
+    > p:nth-child(2) {
+        > a {
+            color: $SecondaryColour;
+        }
     }
 }
 
@@ -46,6 +56,9 @@ ul {
     justify-content: end;
     display: flex;
     gap: 1rem;
+    > a {
+        color: hsl(0, 0%, 95%);
+    }
 }
 
 .msg-content {
@@ -75,4 +88,70 @@ ul {
 form {
     display: flex;
     flex-direction: column;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.vertical-center {
+    display: grid;
+}
+
+.thin {
+    width: 90%;
+}
+
+.thinner {
+    width: 75%;
+}
+
+.login-register-form {
+    background-color: $DarkColour;
+    padding: 3rem 0;
+    border-radius: 1rem;
+    margin-top: 5%;
+
+    input {
+        width: 20rem;
+        min-width: fit-content;
+        margin: .5rem 0;
+        background-color: transparent;
+        color: hsl(0, 0%, 95%);
+        border-radius: 1rem;
+        border: 2px solid $MainColour;
+        text-align: center;
+        padding: .5rem 1rem;
+    }
+
+    button {
+        width: fit-content;
+        padding: .5rem 2rem;
+        margin: .5rem 0;
+        background-color: transparent;
+        color: hsl(0, 0%, 95%);
+        border-radius: 1rem;
+        border: 2px solid $SecondaryColour;
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: $SecondaryColour;
+        transition: 25ms;
+    }
+
+    p {
+        color: hsl(0, 0%, 85%);
+    }
+
+    h1 {
+        color: hsl(0, 0%, 95%);
+    }
+
+    a {
+        color: hsl(0, 0%, 60%);
+    }
 }

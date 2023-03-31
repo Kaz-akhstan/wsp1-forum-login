@@ -63,8 +63,8 @@ select {
     scroll-behavior: auto;
   }
   *,
-*::before,
-*::after {
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -73,7 +73,9 @@ select {
 }
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: hsl(0deg, 0%, 85%);
+  /* Created with https://www.css-gradient.com */
+  background: #313FB3;
+  background: linear-gradient(to bottom right, #313FB3, #B31873);
 }
 
 ul {
@@ -88,14 +90,11 @@ ul {
   padding: 1rem;
   margin: 0.25rem 0;
   border-radius: 0.5rem;
-  background-color: hsl(0deg, 0%, 90%);
+  border: hsl(0, 0%, 35%) solid 1px;
+  background-color: #252525;
+  color: hsl(0, 0%, 95%);
   display: flex;
   flex-direction: column;
-}
-
-.msg:hover {
-  background-image: linear-gradient(to top, #e8eaed 0%, white 100%);
-  cursor: pointer;
 }
 
 .msg-title {
@@ -110,11 +109,20 @@ ul {
   font-weight: bolder;
   font-style: normal;
 }
+.msg-title > p:first-child > a {
+  color: #313FB3;
+}
+.msg-title > p:nth-child(2) > a {
+  color: #B31873;
+}
 
 .msg-links {
   justify-content: end;
   display: flex;
   gap: 1rem;
+}
+.msg-links > a {
+  color: hsl(0, 0%, 95%);
 }
 
 .msg-content {
@@ -144,6 +152,66 @@ ul {
 form {
   display: flex;
   flex-direction: column;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vertical-center {
+  display: grid;
+}
+
+.thin {
+  width: 90%;
+}
+
+.thinner {
+  width: 75%;
+}
+
+.login-register-form {
+  background-color: #252525;
+  padding: 3rem 0;
+  border-radius: 1rem;
+  margin-top: 5%;
+}
+.login-register-form input {
+  width: 20rem;
+  min-width: fit-content;
+  margin: 0.5rem 0;
+  background-color: transparent;
+  color: hsl(0, 0%, 95%);
+  border-radius: 1rem;
+  border: 2px solid #313FB3;
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+.login-register-form button {
+  width: fit-content;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0;
+  background-color: transparent;
+  color: hsl(0, 0%, 95%);
+  border-radius: 1rem;
+  border: 2px solid #B31873;
+}
+.login-register-form button:hover {
+  cursor: pointer;
+  background-color: #B31873;
+  transition: 25ms;
+}
+.login-register-form p {
+  color: hsl(0, 0%, 85%);
+}
+.login-register-form h1 {
+  color: hsl(0, 0%, 95%);
+}
+.login-register-form a {
+  color: hsl(0, 0%, 60%);
 }
 
 /*# sourceMappingURL=style.css.map */
