@@ -2,10 +2,8 @@
 {% block  content %}
 <div class="container">
     <form action="/new" method="post">
-        <label for="title">Titel</label>
-        <input type="text" name="title" id="title">
-        <label for="content">Innehåll</label>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
+        <input type="text" name="title" id="title" placeholder="Title">
+        <textarea name="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
         <button type="submit">Posta</button>
     </form>
 </div>

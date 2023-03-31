@@ -37,8 +37,7 @@ router.post('/login', async function (req, res, next) {
     else {
         const [user] = await promisePool.query(`SELECT * FROM rj28users WHERE name = ?`, [username])
         console.log(user[0])
-        if(user[0] !== undefined)
-        {
+        if (user[0] !== undefined) {
             bcrypt.compare(password, user[0].password, function (err, result) {
                 if (result === true) {
                     req.session.user = user[0]
@@ -59,7 +58,8 @@ router.get('/profile', async function (req, res, next) {
     if (req.session.user) {
         res.render('profile.njk', {
             name: req.session.user.name,
-            user: req.session.user || 0
+            user: req.session.user || 0,
+            posts: await promisePool.query(`SELECT * FROM rj28forum WHERE AuthorId = ?`, [req.session.user.id])
         })
     }
     else {
@@ -79,7 +79,8 @@ router.post('/logout', async function (req, res, next) {
 
 router.get('/register', async function (req, res, next) {
     res.render('register.njk', {
-        user: req.session.user || 0})
+        user: req.session.user || 0
+    })
 })
 
 router.post('/register', async function (req, res, next) {
@@ -96,32 +97,40 @@ router.post('/register', async function (req, res, next) {
     else if (passwordConfirmation === "") {
         return res.send('Passwords should match')
     }
+    else if (password.length <= 8)
+    {
+        return res.send('Password must be 8 characters or longer')
+    }
 
-    if (password == passwordConfirmation) {
-
-        bcrypt.hash(password, 10, async function (err, hash) {
-            console.log(hash)
-            const [rows] = await promisePool.query("SELECT * FROM rj28users WHERE name = ?", [username])
-            console.log(rows[0])
-            if (rows.length === 0) {
-                const [user] = await promisePool.query("INSERT INTO rj28users (name, password) VALUES (?, ?)", [username, hash])
-                const [sessionUser] = await promisePool.query(`SELECT * FROM rj28users WHERE name = ?`, [username])
-                req.session.user = sessionUser[0]
-                return res.redirect('/profile')
-            }
-            else {
-                return res.send('Username is already taken')
-            }
-        });
+    if (validator.isAlphanumeric(username, 'sv-SE')) {
+        if (password == passwordConfirmation) {
+            bcrypt.hash(password, 10, async function (err, hash) {
+                console.log(hash)
+                const [rows] = await promisePool.query("SELECT * FROM rj28users WHERE name = ?", [username])
+                console.log(rows[0])
+                if (rows.length === 0) {
+                    const [user] = await promisePool.query("INSERT INTO rj28users (name, password) VALUES (?, ?)", [username, hash])
+                    const [sessionUser] = await promisePool.query(`SELECT * FROM rj28users WHERE name = ?`, [username])
+                    req.session.user = sessionUser[0]
+                    return res.redirect('/profile')
+                }
+                else {
+                    return res.send('Username is already taken')
+                }
+            });
+        }
+        else {
+            return res.send('Passwords do not match')
+        }
     }
     else {
-        return res.send('Passwords do not match')
+        return res.send('Username is not allowed')
     }
 })
 
 router.get('/new', async function (req, res, next) {
     const [users] = await promisePool.query("SELECT * FROM rj28users")
-    if(req.session.user) {
+    if (req.session.user) {
         res.render('new.njk', {
             title: 'Nytt inlägg',
             user: req.session.user || 0
@@ -132,21 +141,20 @@ router.get('/new', async function (req, res, next) {
     }
 })
 
-router.post('/new', async function (req, res, next){
+router.post('/new', async function (req, res, next) {
     const { title, content } = req.body
     let errors = []
-    if(!title || !content) errors.push("Title and content required")
-    if(title && title.length > 80) errors.push("Title must be less than 80 characters")
-    if(errors.length === 0)
-    {
+    if (!title || !content) errors.push("Title and content required")
+    if (title && title.length > 80) errors.push("Title must be less than 80 characters")
+    if (errors.length === 0) {
         const sanitize = (str) => {
             let temp = str.trim()
             temp = validator.stripLow(temp)
             temp = validator.escape(temp)
             return temp
         }
-        if(title) sanitizedTitle = sanitize(title)
-        if(content) sanitizedContent = sanitize(content) 
+        if (title) sanitizedTitle = sanitize(title)
+        if (content) sanitizedContent = sanitize(content)
         const [rows] = await promisePool.query("INSERT INTO rj28forum (AuthorId, title, content) VALUES (?, ?, ?)", [req.session.user.id, sanitizedTitle, sanitizedContent])
         res.redirect('/')
     }
@@ -165,10 +173,15 @@ router.get('/post/:id', async function (req, res) {
     });
 })
 
-// async function like(id)
-// {
-//     console.log(id)
-//     const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [id])
-// }
+router.post('/comment', async function (req, res)
+{
+    const { comment } = req.body
+    res.send(comment)
+})
+
+router.get('/like/:id', async function (req, res) {
+    console.log(req.params.id)
+    const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [req.params.id])
+})
 
 module.exports = router;

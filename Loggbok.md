@@ -11,3 +11,9 @@ Jag har haft problem med att fixa like systemet men jag fixade naven.
 ## 24-03-2023
 Förra gången fixade jag naven så att den visade olika knappar beroende på om man var inloggad eller inte.
 Idag ska jag jobba på att tvätta data och validera.
+
+## 28-03-2023
+
+
+## 31-03-2023
+Förra gången försökte jag fixa like knappen, nu ska jag se till att allting fungerar, eventuellt börja jobba på kommentarer. 

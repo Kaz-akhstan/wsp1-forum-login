@@ -103,6 +103,7 @@ ul {
   width: 100%;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 .msg-title > p:first-child {
   margin-right: auto;

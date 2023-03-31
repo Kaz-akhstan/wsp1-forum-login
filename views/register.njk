@@ -2,14 +2,14 @@
 {% block content %}
 <main class="container">
     <form action="/register" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username">
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        <label for="passwordConfirmation">Password</label>
-        <input type="password" name="passwordConfirmation">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="passwordConfirmation" placeholder="Confirm Password">
         <button type="submit">Register</button>
     </form>
+    {% for error in errors %}
+    <p>{{ error }}</p>
+    {% endfor %}
 </main>
 
 {% endblock %}
