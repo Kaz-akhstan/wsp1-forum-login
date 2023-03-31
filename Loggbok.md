@@ -17,3 +17,4 @@ Idag ska jag jobba på att tvätta data och validera.
 
 ## 31-03-2023
 Förra gången försökte jag fixa like knappen, nu ska jag se till att allting fungerar, eventuellt börja jobba på kommentarer. 
+De problem jag stött på är att mitt like script inte kan nå databasen.
