@@ -31,6 +31,19 @@ ul {
     flex-direction: column;
 }
 
+#edit-form {
+    width: 100%;
+}
+
+#edit {
+    background-color: transparent;
+    color: white;
+}
+
+#edit-button {
+    width: fit-content;
+}
+
 .msg-title {
     font-style: italic;
     width: 100%;
@@ -107,6 +120,73 @@ form {
 
 .thinner {
     width: 75%;
+}
+
+.post-form {
+    background-color: $DarkColour;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    margin-top: 5%;
+
+    select {
+        color: hsl(0, 0%, 95%);
+        background-color: transparent;
+        border-radius: 1rem;
+        border: 2px solid $MainColour;
+        padding: .5rem 1rem;
+    }
+
+    option {
+        background-color: $DarkColour;
+    }
+
+    input {
+        min-width: fit-content;
+        margin: .5rem 0;
+        background-color: transparent;
+        color: hsl(0, 0%, 95%);
+        border-radius: 1rem;
+        border: 2px solid $MainColour;
+        padding: .5rem 1rem;
+    }
+
+    textarea {
+        min-width: fit-content;
+        margin: .5rem 0;
+        background-color: transparent;
+        color: hsl(0, 0%, 95%);
+        border-radius: 1rem;
+        border: 2px solid $MainColour;
+        padding: .5rem 1rem;
+    }
+
+    button {
+        width: fit-content;
+        padding: .5rem 2rem;
+        margin: .5rem 0;
+        background-color: transparent;
+        color: hsl(0, 0%, 95%);
+        border-radius: 1rem;
+        border: 2px solid $SecondaryColour;
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: $SecondaryColour;
+        transition: 25ms;
+    }
+
+    p {
+        color: hsl(0, 0%, 85%);
+    }
+
+    h1 {
+        color: hsl(0, 0%, 95%);
+    }
+
+    a {
+        color: hsl(0, 0%, 60%);
+    }
 }
 
 .login-register-form {

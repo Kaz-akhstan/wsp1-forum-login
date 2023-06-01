@@ -97,6 +97,19 @@ ul {
   flex-direction: column;
 }
 
+#edit-form {
+  width: 100%;
+}
+
+#edit {
+  background-color: transparent;
+  color: white;
+}
+
+#edit-button {
+  width: fit-content;
+}
+
 .msg-title {
   font-style: italic;
   width: 100%;
@@ -171,6 +184,64 @@ form {
 
 .thinner {
   width: 75%;
+}
+
+.post-form {
+  background-color: #252525;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  margin-top: 5%;
+}
+.post-form select {
+  color: hsl(0, 0%, 95%);
+  background-color: transparent;
+  border-radius: 1rem;
+  border: 2px solid #313FB3;
+  padding: 0.5rem 1rem;
+}
+.post-form option {
+  background-color: #252525;
+}
+.post-form input {
+  min-width: fit-content;
+  margin: 0.5rem 0;
+  background-color: transparent;
+  color: hsl(0, 0%, 95%);
+  border-radius: 1rem;
+  border: 2px solid #313FB3;
+  padding: 0.5rem 1rem;
+}
+.post-form textarea {
+  min-width: fit-content;
+  margin: 0.5rem 0;
+  background-color: transparent;
+  color: hsl(0, 0%, 95%);
+  border-radius: 1rem;
+  border: 2px solid #313FB3;
+  padding: 0.5rem 1rem;
+}
+.post-form button {
+  width: fit-content;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0;
+  background-color: transparent;
+  color: hsl(0, 0%, 95%);
+  border-radius: 1rem;
+  border: 2px solid #B31873;
+}
+.post-form button:hover {
+  cursor: pointer;
+  background-color: #B31873;
+  transition: 25ms;
+}
+.post-form p {
+  color: hsl(0, 0%, 85%);
+}
+.post-form h1 {
+  color: hsl(0, 0%, 95%);
+}
+.post-form a {
+  color: hsl(0, 0%, 60%);
 }
 
 .login-register-form {

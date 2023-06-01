@@ -1,10 +1,15 @@
 {% extends "base.njk" %}
 {% block  content %}
 <div class="container">
-    <form action="/new" method="post">
+    <form action="/new" method="post" class="post-form">
+        <select name="tag" id="tag">
+            {% for tag in tags %}
+            <option value="{{ tag.tag }}">{{ tag.tag }}</option>
+            {% endfor %}
+        </select>
         <input type="text" name="title" id="title" placeholder="Title">
         <textarea name="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
-        <button type="submit">Posta</button>
+        <button type="submit">Post</button>
     </form>
 </div>
 {% endblock %}

@@ -6,6 +6,7 @@ $main-colour: #252525;
 $MainColour: #313FB3;
 $SecondaryColour: #B31873;
 $DarkColour: #252525;
+$DarkerColour: #212121;
 $LighterDarkColour: hsl(0, 0%, 35%);
 
 
@@ -65,6 +66,13 @@ $LighterDarkColour: hsl(0, 0%, 35%);
             padding: 0;
             flex-direction: row;
             list-style: none;
+            li > p {
+                padding: 1.5rem $nav-padding;
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
             li > a {
                 padding: 1.5rem $nav-padding;
                 display: inline-block;
@@ -74,7 +82,10 @@ $LighterDarkColour: hsl(0, 0%, 35%);
             }
             li > a:hover {
                 cursor: pointer;
-                //background-color: hsl(0, 0%, 85%);
+                color: $SecondaryColour;
+            }
+            li > p:hover {
+                cursor: pointer;
                 color: $SecondaryColour;
             }
         }
@@ -88,6 +99,36 @@ $LighterDarkColour: hsl(0, 0%, 35%);
         }
     }
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $DarkerColour;
+    min-width: 20rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover { 
+    background-color: $LighterDarkColour;
+    color: black;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 .hide {
     display: none;

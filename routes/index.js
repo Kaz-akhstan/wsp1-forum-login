@@ -9,9 +9,26 @@ const { response } = require('express');
 
 router.get('/', async function (req, res, next) {
     const [posts] = await promisePool.query('SELECT rj28forum.*, rj28users.name FROM rj28forum JOIN rj28users ON rj28forum.AuthorId = rj28users.id ORDER BY createdAt DESC')
+    const [tags] = await promisePool.query('SELECT DISTINCT tag FROM rj28forum')
+    console.log(tags)
     res.render('index.njk', {
         posts: posts,
         title: 'Forum',
+        index: true,
+        tags: tags,
+        user: req.session.user || 0
+    })
+})
+
+router.get('/tag/:tag', async function (req, res) {
+    const [posts] = await promisePool.query('SELECT rj28forum.*, rj28users.name FROM rj28forum JOIN rj28users ON rj28forum.AuthorId = rj28users.id WHERE tag = (?) ORDER BY createdAt DESC', [req.params.tag])
+    const [tags] = await promisePool.query('SELECT DISTINCT tag FROM rj28forum')
+    console.log(tags)
+    res.render('index.njk', {
+        posts: posts,
+        title: 'Forum',
+        index: true,
+        tags: tags,
         user: req.session.user || 0
     })
 })
@@ -130,9 +147,11 @@ router.post('/register', async function (req, res, next) {
 
 router.get('/new', async function (req, res, next) {
     const [users] = await promisePool.query("SELECT * FROM rj28users")
+    const [tags] = await promisePool.query('SELECT DISTINCT tag FROM rj28forum')
     if (req.session.user) {
         res.render('new.njk', {
             title: 'Nytt inlägg',
+            tags: tags,
             user: req.session.user || 0
         })
     }
@@ -142,7 +161,7 @@ router.get('/new', async function (req, res, next) {
 })
 
 router.post('/new', async function (req, res, next) {
-    const { title, content } = req.body
+    const {tag, title, content } = req.body
     let errors = []
     if (!title || !content) errors.push("Title and content required")
     if (title && title.length > 80) errors.push("Title must be less than 80 characters")
@@ -155,7 +174,7 @@ router.post('/new', async function (req, res, next) {
         }
         if (title) sanitizedTitle = sanitize(title)
         if (content) sanitizedContent = sanitize(content)
-        const [rows] = await promisePool.query("INSERT INTO rj28forum (AuthorId, title, content) VALUES (?, ?, ?)", [req.session.user.id, sanitizedTitle, sanitizedContent])
+        const [rows] = await promisePool.query("INSERT INTO rj28forum (AuthorId, title, content, tag) VALUES (?, ?, ?, ?)", [req.session.user.id, sanitizedTitle, sanitizedContent, tag])
         res.redirect('/')
     }
     else {
@@ -164,13 +183,31 @@ router.post('/new', async function (req, res, next) {
 })
 
 router.get('/post/:id', async function (req, res) {
+    var loggedInOnPost = false
     console.log(req.params.id)
     const [rows] = await promisePool.query('SELECT rj28forum.*, rj28users.name AS username FROM rj28forum JOIN rj28users ON rj28forum.AuthorId = rj28users.id WHERE rj28forum.id = ?', [req.params.id])
+    if(req.session.user) {
+        if(req.session.user.name === rows[0].username) {
+            loggedInOnPost = true
+        }
+    }
     res.render('post.njk', {
         post: rows[0],
         title: 'Forum',
-        user: req.session.user || 0
+        user: req.session.user || 0,
+        loggedIn: loggedInOnPost
     });
+})
+
+router.post('/edit/:id', async function (req, res) {
+    const { edit } = req.body
+    const [rows] = await promisePool.query("UPDATE rj28forum SET content = ? WHERE id = ?", [edit, req.params.id])
+    res.redirect('/')
+})
+
+router.get('/delete/:id', async function (req, res) {
+    const [rows] = await promisePool.query("DELETE FROM rj28forum WHERE id = ?", [req.params.id])
+    res.redirect('/')
 })
 
 router.post('/comment', async function (req, res)
@@ -182,6 +219,7 @@ router.post('/comment', async function (req, res)
 router.get('/like/:id', async function (req, res) {
     console.log(req.params.id)
     const [rows] = await promisePool.query('UPDATE rj28forum SET likes = likes + 1 WHERE id = ?', [req.params.id])
+    res.redirect('/')
 })
 
 module.exports = router;

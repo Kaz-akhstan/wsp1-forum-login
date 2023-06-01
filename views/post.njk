@@ -6,14 +6,24 @@
         <p>@{{ post.username }}</p>
     </div>
     <div class="msg-content-all">
+        {% if loggedIn %}
+        <form class="container" id="edit-form" action="/edit/{{ post.id }}" method="post">
+            <input type="text" id="edit" name="edit" value="{{ post.content }}">
+            <button id="edit-button" type="submit">Confirm Edit</button>
+        </form>
+        {% else %}
         <p>{{ post.content }}</p>
+        {% endif %}
     </div>
     <p class="msg-date">{{ post.createdAt }}</p>
     <div class="msg-links">
-        <a href="">Like</a>
+        <a href="/like/{{ post.id }}">Like {{ post.likes }}</a>
         <a href="">Comment</a>
         <a href="">Share</a>
         <a href="">Report</a>
+        {% if loggedIn %}
+        <a href="/delete/{{ post.id }}">Delete</a>
+        {% endif %}
       </div>
 </div>
 <form class="container" action="/comment" method="post">

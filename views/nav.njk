@@ -2,7 +2,7 @@
     <div class="navbar__inner container">
         <a href="/">
             <div class="logo">
-                <img src="profiles/0.png" alt="">
+                <img src="/profiles/0.png" alt="">
             </div>
         </a>
         <button class="navbar__button"><span class="material-symbols-outlined">menu</span></button>
@@ -11,7 +11,16 @@
                 {% if user %}
                 <li><a href="/new">Post</a></li>
                 {% endif %}
-                <li><a href="">Tags</a></li>
+                {% if index %}
+                <li class="dropdown">
+                    <p>Tags</p>
+                    <div class="dropdown-content">
+                        {% for tag in tags %}
+                        <a href="/tag/{{ tag.tag }}">{{ tag.tag }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endif %}
                 {% if user %}
                     <li><a href="/profile">Profile</a></li>
                 {% else %}
@@ -20,5 +29,5 @@
             </ul>
         </div>
     </div>
-    <script src="javascript/burger.js"></script>
+    <script src="/javascript/burger.js"></script>
 </nav>
